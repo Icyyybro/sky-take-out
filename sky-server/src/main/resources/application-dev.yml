@@ -9,5 +9,5 @@ sky:
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
     access-key-id: LTAI5tKFYBfZzdRTwT8T7aFn
-    access-key-secret: VD9vt4Z1VUaiKA69jpkhXm9HWblNGi
+    # access-key-secret: VD9vt4Z1VUaiKA69jpkhXm9HWblNGi
     bucket-name: icyyybro-sky-take-out
