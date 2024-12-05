@@ -8,6 +8,6 @@ sky:
     password: WYC5552374
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: # 注意填充id
-    access-key-secret: # 注意填充密码
+    access-key-id:
+    access-key-secret:
     bucket-name: icyyybro-sky
