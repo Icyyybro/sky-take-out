@@ -73,4 +73,58 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
     }
+
+    /**
+     * 查看购物车
+     * @return
+     */
+    @Override
+    public List<ShoppingCart> showShoppingCart() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.setUserId(BaseContext.getCurrentId());
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+        return list;
+    }
+
+    /**
+     * 删除购物车中一个商品
+     * @param shoppingCartDTO
+     */
+    @Override
+    public void delete(ShoppingCartDTO shoppingCartDTO) {
+        //如果菜品id不为空，说明删除菜品
+        if(shoppingCartDTO.getDishId() != null){
+            //取到购物车记录id
+            ShoppingCart shoppingCart = shoppingCartMapper.getByDishId(shoppingCartDTO.getDishId());
+            int num = shoppingCart.getNumber() - 1;
+            if(num > 0){
+                shoppingCart.setNumber(num);
+                shoppingCartMapper.updateNumberById(shoppingCart);
+            }
+            else
+                shoppingCartMapper.deleteById(shoppingCart.getId());
+        }
+        else {
+            //取到购物车记录id
+            ShoppingCart shoppingCart = shoppingCartMapper.getBySetmealId(shoppingCartDTO.getSetmealId());
+            int num = shoppingCart.getNumber() - 1;
+            if(num > 0){
+                shoppingCart.setNumber(num);
+                shoppingCartMapper.updateNumberById(shoppingCart);
+            }
+            else
+                shoppingCartMapper.deleteById(shoppingCart.getId());
+        }
+    }
+
+    /**
+     * 清空购物车
+     */
+    @Override
+    public void clean() {
+        //获取当前微信用户的id
+        Long userId = BaseContext.getCurrentId();
+        shoppingCartMapper.deleteByUserId(userId);
+    }
+
 }
